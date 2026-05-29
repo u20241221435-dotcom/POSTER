@@ -2,12 +2,11 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Póster ECG — Electrónica Analógica</title>
+<title>Póster — Evolución del Criterio Ingenieril en Electrónica Analógica</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap');
   *{box-sizing:border-box;margin:0;padding:0;}
-  body{background:#eee;display:flex;justify-content:center;padding:20px;}
+  body{background:#eee;display:flex;justify-content:center;padding:20px;min-height:100vh;}
   .poster{font-family:'IBM Plex Sans',sans-serif;background:#F8F6F0;width:680px;color:#1a1a1a;border:1px solid #ddd;}
   .header{background:#0D1B2A;padding:10px 32px 12px;position:relative;overflow:hidden;}
   .header::before{content:'';position:absolute;top:-40px;right:-40px;width:180px;height:180px;border-radius:50%;border:32px solid rgba(29,158,117,0.12);}
@@ -18,55 +17,32 @@
   .ecg-line{width:100%;height:36px;background:#0D1B2A;padding:0 32px;}
   .body{padding:20px 24px;display:grid;gap:14px;}
   .section-label{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:2.5px;color:#1D9E75;text-transform:uppercase;margin-bottom:6px;}
-  .context-box{background:#0D1B2A;border-radius:8px;padding:16px 18px;display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-  .ctx-item .label{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:1.5px;color:rgba(255,255,255,0.4);text-transform:uppercase;margin-bottom:3px;}
-  .ctx-item .value{font-size:12px;color:#fff;font-weight:400;line-height:1.4;}
-  .ctx-item .value strong{color:#1D9E75;font-weight:500;}
-  .projects-block{background:#0D1B2A;border-radius:8px;padding:14px 16px;}
-  .projects-cycle-label{font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:1.5px;color:rgba(255,255,255,0.35);text-transform:uppercase;text-align:center;margin-bottom:10px;}
-  .proj-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;}
-  .proj-card{border-radius:6px;padding:10px 8px;display:flex;flex-direction:column;gap:5px;position:relative;overflow:hidden;}
-  .proj-card::after{content:attr(data-n);font-family:'Bebas Neue',sans-serif;font-size:48px;position:absolute;bottom:-6px;right:2px;opacity:0.06;line-height:1;}
-  .p1{background:#E1F5EE;border:0.5px solid #5DCAA5;} .p2{background:#E6F1FB;border:0.5px solid #85B7EB;} .p3{background:#FAEEDA;border:0.5px solid #EF9F27;} .p4{background:#EEEDFE;border:0.5px solid #AFA9EC;} .p5{background:#FAECE7;border:0.5px solid #F0997B;}
-  .pnum{font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:1px;font-weight:500;}
-  .p1 .pnum{color:#0F6E56;}.p2 .pnum{color:#185FA5;}.p3 .pnum{color:#854F0B;}.p4 .pnum{color:#3C3489;}.p5 .pnum{color:#993C1D;}
-  .ptitle{font-size:10px;font-weight:600;line-height:1.25;}
-  .p1 .ptitle{color:#085041;}.p2 .ptitle{color:#0C447C;}.p3 .ptitle{color:#633806;}.p4 .ptitle{color:#3C3489;}.p5 .ptitle{color:#712B13;}
-  .pdesc{font-size:9px;line-height:1.5;font-weight:300;}
-  .p1 .pdesc{color:#085041;}.p2 .pdesc{color:#0C447C;}.p3 .pdesc{color:#633806;}.p4 .pdesc{color:#3C3489;}.p5 .pdesc{color:#712B13;}
-  .ptag{display:inline-block;margin-top:4px;padding:2px 5px;border-radius:3px;font-family:'IBM Plex Mono',monospace;font-size:7.5px;font-weight:500;letter-spacing:0.3px;width:fit-content;}
-  .p1 .ptag{background:#085041;color:#E1F5EE;}.p2 .ptag{background:#185FA5;color:#E6F1FB;}.p3 .ptag{background:#633806;color:#FAEEDA;}.p4 .ptag{background:#3C3489;color:#EEEDFE;}.p5 .ptag{background:#712B13;color:#FAECE7;}
-  .cycle-row{display:flex;align-items:center;justify-content:center;gap:0;margin-top:10px;}
-  .cycle-node{font-family:'IBM Plex Mono',monospace;font-size:8px;color:rgba(255,255,255,0.55);padding:3px 8px;border:0.5px solid rgba(255,255,255,0.15);border-radius:3px;white-space:nowrap;}
-  .cycle-arrow{color:#1D9E75;font-size:11px;padding:0 3px;opacity:0.7;}
-  .proj-detail{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-  .pd-left{background:#0D1B2A;border-radius:8px;padding:14px;}
-  .pd-slabel{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;}
-  .pd-title{font-family:'Bebas Neue',sans-serif;font-size:18px;line-height:1.1;margin-bottom:8px;}
-  .pd-right{display:flex;flex-direction:column;gap:8px;}
-  .pd-arch{background:#fff;border:0.5px solid #ddd;border-radius:8px;padding:12px;}
-  .pd-arch-slabel{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:2px;color:#1D9E75;text-transform:uppercase;margin-bottom:4px;}
-  .pd-arch-title{font-family:'Bebas Neue',sans-serif;font-size:15px;color:#0D1B2A;margin-bottom:8px;letter-spacing:0.5px;}
-  .pd-text{font-size:10px;line-height:1.6;font-weight:300;color:#333;}
-  .pd-method{border-radius:8px;padding:10px 12px;}
-  .pd-method-slabel{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;}
-  .badge-row{display:flex;flex-wrap:wrap;gap:3px;margin-top:6px;}
-  .badge{display:inline-flex;align-items:center;padding:3px 8px;border-radius:3px;font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:500;margin:2px 2px 2px 0;}
-  .bullet-list{display:flex;flex-direction:column;gap:4px;margin-top:6px;}
-  .bullet-item{display:flex;align-items:flex-start;gap:6px;font-size:9.5px;line-height:1.4;}
-  .bdot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:3px;}
-  .blocks-flow{display:flex;align-items:center;gap:4px;flex-wrap:nowrap;}
-  .block{flex:1;background:#0D1B2A;border-radius:4px;padding:5px 3px;text-align:center;min-width:0;}
-  .block-label{font-family:'IBM Plex Mono',monospace;font-size:7px;color:#1D9E75;font-weight:500;text-transform:uppercase;letter-spacing:0.3px;line-height:1.3;}
-  .block-arrow{color:#1D9E75;font-size:11px;flex-shrink:0;}
-  .method-pill{padding:3px 8px;border-radius:20px;font-family:'IBM Plex Mono',monospace;font-size:8.5px;font-weight:500;border:0.5px solid;}
-  .critical-path-h{background:#fff;border:0.5px solid #ddd;border-radius:8px;padding:14px 18px;}
-  .milestones-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;}
-  .milestone-col{padding:0 14px;border-right:0.5px solid #eee;display:flex;flex-direction:column;gap:5px;}
-  .milestone-col:first-child{padding-left:0;}.milestone-col:last-child{border-right:none;padding-right:0;}
-  .milestone-dot{width:10px;height:10px;border-radius:50%;margin-bottom:4px;}
-  .milestone-title{font-size:10px;font-weight:600;color:#0D1B2A;line-height:1.3;}
-  .milestone-text{font-size:9px;color:#555;line-height:1.5;font-weight:300;}
+  .ruta-block{background:#0D1B2A;border-radius:8px;padding:16px 18px;}
+  .ruta-intro{font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:1.5px;color:rgba(255,255,255,0.35);text-transform:uppercase;text-align:center;margin-bottom:16px;}
+  .timeline{display:flex;flex-direction:column;gap:0;position:relative;}
+  .tl-item{display:grid;grid-template-columns:46px 1fr;gap:0;position:relative;}
+  .tl-node{display:flex;flex-direction:column;align-items:center;padding-top:6px;position:relative;z-index:1;}
+  .tl-circle{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:16px;color:#fff;border:1.5px solid;flex-shrink:0;}
+  .tl-card{border-radius:6px;border:0.5px solid;margin-bottom:10px;display:grid;grid-template-columns:1fr 112px;overflow:hidden;}
+  .tl-card-content{padding:10px 10px 10px 12px;}
+  .tl-card-img{border-left:0.5px solid;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;min-height:120px;}
+  .img-placeholder-text{font-family:'IBM Plex Mono',monospace;font-size:7px;letter-spacing:0.5px;text-align:center;opacity:0.45;line-height:1.4;padding:0 6px;}
+  .tl-card-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:6px;gap:6px;}
+  .tl-card-title{font-size:11px;font-weight:600;line-height:1.3;flex:1;}
+  .tl-badge{font-family:'IBM Plex Mono',monospace;font-size:7px;font-weight:500;padding:2px 6px;border-radius:3px;white-space:nowrap;flex-shrink:0;}
+  .capacidad-row{display:flex;align-items:flex-start;gap:5px;margin-bottom:5px;}
+  .cap-icon{width:15px;height:15px;border-radius:3px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;font-size:8px;font-weight:700;}
+  .cap-text{font-size:9px;line-height:1.45;font-weight:400;}
+  .met-tags{display:flex;flex-wrap:wrap;gap:3px;margin-top:6px;}
+  .met-tag{font-family:'IBM Plex Mono',monospace;font-size:7px;padding:2px 5px;border-radius:10px;border:0.5px solid;}
+  .competencias-box{background:#fff;border:0.5px solid #ddd;border-radius:8px;padding:14px 16px;}
+  .comp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:8px;}
+  .comp-item{background:#F8F6F0;border-radius:5px;padding:8px;text-align:center;border:0.5px solid #e0ddd5;}
+  .comp-num{font-family:'Bebas Neue',sans-serif;font-size:22px;line-height:1;margin-bottom:2px;}
+  .comp-label{font-size:8.5px;font-weight:500;line-height:1.3;color:#444;}
+  .comp-sub{font-size:7.5px;font-weight:300;color:#777;margin-top:2px;line-height:1.3;}
+  .rel-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .rel-panel{border-radius:8px;padding:12px 14px;}
   .conclusions-box{background:#0D1B2A;border-radius:8px;padding:16px 18px;}
   .conclusions-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:10px;}
   .conclusion-item{border-left:2px solid #1D9E75;padding-left:8px;}
@@ -76,8 +52,11 @@
   .footer-left{font-family:'IBM Plex Mono',monospace;font-size:8.5px;color:rgba(255,255,255,0.35);letter-spacing:0.5px;line-height:1.6;}
   .footer-right{display:flex;flex-direction:column;align-items:flex-end;gap:3px;}
   .ref-item{font-family:'IBM Plex Mono',monospace;font-size:7.5px;color:rgba(255,255,255,0.3);line-height:1.4;text-align:right;}
-  .proj-section-header{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
-  .proj-num-pill{font-family:'IBM Plex Mono',monospace;font-size:8px;font-weight:500;padding:2px 8px;border-radius:3px;letter-spacing:1px;}
+  .c1{background:#E1F5EE;border-color:#5DCAA5;} .c1-img{border-color:#5DCAA5;background:#d0f0e4;} .c1-t{color:#085041;} .c1-b{background:#085041;color:#E1F5EE;} .c1-circle{background:#085041;border-color:#1D9E75;} .c1-icon{background:#085041;color:#9FE1CB;}
+  .c2{background:#E6F1FB;border-color:#85B7EB;} .c2-img{border-color:#85B7EB;background:#d4e9f7;} .c2-t{color:#0C447C;} .c2-b{background:#0C447C;color:#E6F1FB;} .c2-circle{background:#0C447C;border-color:#378ADD;} .c2-icon{background:#0C447C;color:#B5D4F4;}
+  .c3{background:#FAEEDA;border-color:#EF9F27;} .c3-img{border-color:#EF9F27;background:#f5ddb0;} .c3-t{color:#633806;} .c3-b{background:#633806;color:#FAEEDA;} .c3-circle{background:#633806;border-color:#EF9F27;} .c3-icon{background:#633806;color:#FAC775;}
+  .c4{background:#EEEDFE;border-color:#AFA9EC;} .c4-img{border-color:#AFA9EC;background:#dedcf9;} .c4-t{color:#3C3489;} .c4-b{background:#3C3489;color:#EEEDFE;} .c4-circle{background:#3C3489;border-color:#7F77DD;} .c4-icon{background:#3C3489;color:#CECBF6;}
+  .c5{background:#FAECE7;border-color:#F0997B;} .c5-img{border-color:#F0997B;background:#f5d0c2;} .c5-t{color:#712B13;} .c5-b{background:#712B13;color:#FAECE7;} .c5-circle{background:#712B13;border-color:#D85A30;} .c5-icon{background:#712B13;color:#F5C4B3;}
 </style>
 </head>
 <body>
@@ -92,370 +71,193 @@
     </svg>
   </div>
   <div class="body">
+
     <!-- CONTEXTO -->
     <div>
-      <div class="section-label">Nuestra Aventura</div>
-      <div class="context-box">
-        <div class="ctx-item"><div class="label">Objetivo general</div><div class="value">Integrar electrónica analógica con <strong>metodología de ingeniería real</strong>: desde el problema hasta la fabricación física documentada.</div></div>
-        <div class="ctx-item"><div class="label">Hilo conductor</div><div class="value">Cinco proyectos articulados que culminan en un <strong>amplio conocimiento analógico</strong> funcional, validado y replicable.</div></div>
-        <div class="ctx-item"><div class="label">Enfoque pedagógico</div><div class="value"><strong>Lean Startup + Ingeniería iterativa</strong>: validar supuestos rápido, pivotar si es necesario, documentar con rigor.</div></div>
-        <div class="ctx-item"><div class="label">Producto final</div><div class="value">Prototipos funcionales de PCBS <strong>y 5+ experiencias distintas</strong>, esquemáticos, Gerbers, BOM y manual de uso.</div></div>
-      </div>
+      <div class="section-label">Contexto del curso</div>
+      <svg width="100%" height="110" viewBox="0 0 632 110" style="display:block;background:#0D1B2A;border-radius:8px;">
+        <defs><marker id="arrowCtx" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#1D9E75" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+        <polygon points="30,32 30,78 82,55" fill="none" stroke="#1D9E75" stroke-width="1.2"/>
+        <line x1="18" y1="42" x2="30" y2="42" stroke="#1D9E75" stroke-width="1" opacity="0.7"/>
+        <line x1="18" y1="68" x2="30" y2="68" stroke="#1D9E75" stroke-width="1" opacity="0.7"/>
+        <line x1="82" y1="55" x2="115" y2="55" stroke="#1D9E75" stroke-width="1.2" opacity="0.9" marker-end="url(#arrowCtx)"/>
+        <text x="24" y="40" font-family="monospace" font-size="8" fill="#1D9E75" opacity="0.7">+</text>
+        <text x="24" y="72" font-family="monospace" font-size="8" fill="#1D9E75" opacity="0.7">−</text>
+        <text x="50" y="97" text-anchor="middle" font-family="monospace" font-size="8" fill="rgba(255,255,255,0.4)">Amplificador</text>
+        <circle cx="168" cy="55" r="34" fill="none" stroke="#1D9E75" stroke-width="1.2"/>
+        <circle cx="168" cy="55" r="22" fill="rgba(29,158,117,0.08)" stroke="#1D9E75" stroke-width="0.5" stroke-dasharray="3,3"/>
+        <text x="168" y="26" text-anchor="middle" font-family="monospace" font-size="9" fill="#1D9E75" font-weight="500">C</text>
+        <text x="198" y="59" text-anchor="middle" font-family="monospace" font-size="9" fill="#1D9E75" font-weight="500">D</text>
+        <text x="168" y="87" text-anchor="middle" font-family="monospace" font-size="9" fill="#1D9E75" font-weight="500">I</text>
+        <text x="138" y="59" text-anchor="middle" font-family="monospace" font-size="9" fill="#1D9E75" font-weight="500">O</text>
+        <path d="M150,26 Q130,20 133,40" fill="none" stroke="#1D9E75" stroke-width="0.8" opacity="0.5" marker-end="url(#arrowCtx)"/>
+        <path d="M196,70 Q205,82 185,87" fill="none" stroke="#1D9E75" stroke-width="0.8" opacity="0.5" marker-end="url(#arrowCtx)"/>
+        <text x="168" y="53" text-anchor="middle" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.35)">Concebir</text>
+        <text x="168" y="62" text-anchor="middle" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.35)">Diseñar·Impl·Op</text>
+        <line x1="202" y1="55" x2="235" y2="55" stroke="#1D9E75" stroke-width="1.2" opacity="0.9" marker-end="url(#arrowCtx)"/>
+        <rect x="238" y="20" width="162" height="70" rx="6" fill="rgba(29,158,117,0.07)" stroke="#1D9E75" stroke-width="1"/>
+        <rect x="252" y="30" width="28" height="48" rx="3" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="1"/>
+        <rect x="255" y="34" width="22" height="32" rx="1" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <circle cx="266" cy="73" r="2" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="0.8"/>
+        <circle cx="356" cy="38" r="9" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="1"/>
+        <line x1="356" y1="47" x2="356" y2="68" stroke="rgba(255,255,255,0.55)" stroke-width="1"/>
+        <line x1="356" y1="52" x2="342" y2="60" stroke="rgba(255,255,255,0.55)" stroke-width="1"/>
+        <line x1="356" y1="52" x2="370" y2="60" stroke="rgba(255,255,255,0.55)" stroke-width="1"/>
+        <line x1="356" y1="68" x2="348" y2="82" stroke="rgba(255,255,255,0.55)" stroke-width="1"/>
+        <line x1="356" y1="68" x2="364" y2="82" stroke="rgba(255,255,255,0.55)" stroke-width="1"/>
+        <path d="M288,53 Q319,43 340,51" fill="none" stroke="#1D9E75" stroke-width="0.8" stroke-dasharray="3,2" opacity="0.7"/>
+        <circle cx="314" cy="47" r="1.5" fill="#1D9E75" opacity="0.7"/>
+        <text x="319" y="100" text-anchor="middle" font-family="monospace" font-size="8" fill="rgba(255,255,255,0.4)">Usuario real</text>
+        <line x1="400" y1="55" x2="428" y2="55" stroke="#1D9E75" stroke-width="1.2" opacity="0.9" marker-end="url(#arrowCtx)"/>
+        <polyline points="434,55 446,55 452,43 458,55 468,55 474,50 480,55 486,55 490,20 494,72 498,55 510,55 518,45 526,55 542,55 580,55 610,55 632,55" fill="none" stroke="#1D9E75" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        <text x="452" y="39" text-anchor="middle" font-family="monospace" font-size="7" fill="#AFA9EC">P</text>
+        <text x="474" y="47" text-anchor="middle" font-family="monospace" font-size="7" fill="#EF9F27">Q</text>
+        <text x="490" y="16" text-anchor="middle" font-family="monospace" font-size="7" fill="#F0997B">R</text>
+        <text x="496" y="82" text-anchor="middle" font-family="monospace" font-size="7" fill="#85B7EB">S</text>
+        <text x="518" y="41" text-anchor="middle" font-family="monospace" font-size="7" fill="#5DCAA5">T</text>
+        <text x="530" y="100" text-anchor="middle" font-family="monospace" font-size="8" fill="rgba(255,255,255,0.4)">Señal ECG</text>
+      </svg>
     </div>
-    <!-- TIMELINE -->
+
+    <!-- RUTA -->
     <div>
-      <div class="section-label">Evolución del proceso — proyectos 1 al 5</div>
-      <div class="projects-block">
-        <div class="projects-cycle-label">Narrativa no lineal: problema → diseño → validación → iteración</div>
-        <div class="proj-grid">
-          <div class="proj-card p1" data-n="1"><div class="pnum">P·01</div><div class="ptitle">Fundamentos técnicos & competencias</div><div class="pdesc">Superación de barreras en electrónica analógica. Caracterización de BW y Slew Rate. 5 aplicaciones avanzadas con Op-Amps. Trabajo colaborativo y documentación LaTeX.</div><div class="ptag">Técnico + blando</div></div>
-          <div class="proj-card p2" data-n="2"><div class="pnum">P·02</div><div class="ptitle">Concepción & necesidad real</div><div class="pdesc">Fase de empatía: visita a 6+ laboratorios. Identificación de necesidades reales. Definición de MVP de instrumentación. Metodología Lean Startup aplicada al diseño.</div><div class="ptag">Lean Startup / MVP</div></div>
-          <div class="proj-card p3" data-n="3"><div class="pnum">P·03</div><div class="ptitle">Comunicación técnica con fabricantes</div><div class="pdesc">Herramientas para especificar diseños de PCB en EasyEDA. Flujo DRC → DFM → Gerbers. Costo &lt;20 USD. BOM con referencias comerciales para fabricación industrial.</div><div class="ptag">DFM / Manufactura</div></div>
-          <div class="proj-card p4" data-n="4"><div class="pnum">P·04</div><div class="ptitle">Investigación & definición del problema</div><div class="pdesc">Caracterización del ECG: ondas P·Q·R·S·T. Requisitos claros del sistema. Modelo de síntesis por suma de subondas. Diagrama de bloques con módulos asignados.</div><div class="ptag">Requisitos / Modelo</div></div>
-          <div class="proj-card p5" data-n="5"><div class="pnum">P·05</div><div class="ptitle">Diseño, implementación & cierre del ciclo</div><div class="pdesc">Prototipo PCB funcional. Validación en osciloscopio: señal normal y ≥3 anomalías. Documentación completa para fabricación. Cierre iterativo del proceso de ingeniería.</div><div class="ptag">Validación / Cierre</div></div>
-        </div>
-        <div class="cycle-row">
-          <span class="cycle-node">Técnica</span><span class="cycle-arrow">→</span><span class="cycle-node">Problema</span><span class="cycle-arrow">→</span><span class="cycle-node">Fabricación</span><span class="cycle-arrow">→</span><span class="cycle-node">Definición</span><span class="cycle-arrow">→</span><span class="cycle-node">Implementación</span><span class="cycle-arrow">↺</span><span class="cycle-node">Iteración</span>
-        </div>
-      </div>
-    </div>
-    <!-- P01 -->
-    <div>
-      <div class="proj-section-header">
-        <span class="proj-num-pill" style="background:#085041;color:#E1F5EE;">P·01</span>
-        <div class="section-label" style="margin-bottom:0;">Op-Amps: del modelo ideal a la realidad del laboratorio</div>
-      </div>
-      <div class="proj-detail">
-        <div class="pd-left">
-          <div class="pd-slabel" style="color:#5DCAA5;">Caracterización experimental</div>
-          <div class="pd-title" style="color:#1D9E75;">Limitaciones reales<br>del Op-Amp</div>
-          <svg width="100%" height="56" viewBox="0 0 220 56">
-            <line x1="10" y1="44" x2="210" y2="44" stroke="rgba(255,255,255,0.15)" stroke-width="0.5"/>
-            <line x1="10" y1="10" x2="10" y2="44" stroke="rgba(255,255,255,0.15)" stroke-width="0.5"/>
-            <polyline points="10,14 80,14 110,16 140,24 165,34 185,40 210,43" fill="none" stroke="#1D9E75" stroke-width="1.5" stroke-linecap="round"/>
-            <line x1="110" y1="10" x2="110" y2="44" stroke="#EF9F27" stroke-width="0.8" stroke-dasharray="3,2"/>
-            <text x="112" y="20" font-family="monospace" font-size="7" fill="#EF9F27">f_-3dB</text>
-            <text x="12" y="22" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.5)">Av</text>
-            <text x="185" y="52" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.5)">f</text>
-            <text x="12" y="52" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.35)">BW real medido</text>
+      <div class="section-label">Ruta progresiva de formación en diseño electrónico</div>
+      <div class="ruta-block">
+        <div class="ruta-intro">Cada proyecto formó una capacidad — juntas constituyen el criterio de un ingeniero de diseño</div>
+        <div style="position:relative;">
+          <svg style="position:absolute;left:5px;top:0;width:36px;height:100%;pointer-events:none;overflow:visible;" viewBox="0 0 36 600" preserveAspectRatio="none">
+            <defs><marker id="arrTL" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="rgba(29,158,117,0.5)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+            <path d="M18,38 C6,60 30,80 18,102" fill="none" stroke="rgba(29,158,117,0.45)" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arrTL)"/>
+            <path d="M18,152 C6,174 30,194 18,216" fill="none" stroke="rgba(29,158,117,0.45)" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arrTL)"/>
+            <path d="M18,266 C6,288 30,308 18,330" fill="none" stroke="rgba(29,158,117,0.45)" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arrTL)"/>
+            <path d="M18,380 C6,402 30,422 18,444" fill="none" stroke="rgba(29,158,117,0.45)" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arrTL)"/>
           </svg>
-          <div class="badge-row">
-            <span class="badge" style="background:#085041;color:#9FE1CB;">BW limitado</span>
-            <span class="badge" style="background:#085041;color:#9FE1CB;">Slew Rate</span>
-            <span class="badge" style="background:#085041;color:#9FE1CB;">Av = 10 medido</span>
-          </div>
-          <div class="bullet-list" style="margin-top:8px;">
-            <div style="font-family:monospace;font-size:8px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px;">5 aplicaciones desarrolladas</div>
-            <div class="bullet-item"><div class="bdot" style="background:#1D9E75;"></div><span style="color:rgba(255,255,255,0.75);">Rectificador de precisión onda completa</span></div>
-            <div class="bullet-item"><div class="bdot" style="background:#1D9E75;"></div><span style="color:rgba(255,255,255,0.75);">Filtros activos Sallen-Key 2do orden</span></div>
-            <div class="bullet-item"><div class="bdot" style="background:#1D9E75;"></div><span style="color:rgba(255,255,255,0.75);">Convertidor transimpedancia (fotodiodo)</span></div>
-            <div class="bullet-item"><div class="bdot" style="background:#1D9E75;"></div><span style="color:rgba(255,255,255,0.75);">Generadores: onda triangular y cuadrada</span></div>
-            <div class="bullet-item"><div class="bdot" style="background:#1D9E75;"></div><span style="color:rgba(255,255,255,0.75);">Detector de pico con reset activo</span></div>
-          </div>
-        </div>
-        <div class="pd-right">
-          <div class="pd-arch">
-            <div class="pd-arch-slabel">Flujo de trabajo</div>
-            <div class="pd-arch-title">Metodología experimental</div>
-            <div class="blocks-flow">
-              <div class="block"><div class="block-label">Teoría<br>ideal</div></div>
-              <div class="block-arrow">›</div>
-              <div class="block"><div class="block-label">Simulación<br>SPICE</div></div>
-              <div class="block-arrow">›</div>
-              <div class="block"><div class="block-label">Montaje<br>laboratorio</div></div>
-              <div class="block-arrow">›</div>
-              <div class="block" style="background:#085041;"><div class="block-label" style="color:#9FE1CB;">Doc.<br>LaTeX</div></div>
+          <div class="timeline">
+            <!-- P1 -->
+            <div class="tl-item">
+              <div class="tl-node"><div class="tl-circle c1-circle">1</div></div>
+              <div class="tl-card c1">
+                <div class="tl-card-content">
+                  <div class="tl-card-header"><div class="tl-card-title c1-t">Apropiación técnica &amp; cultura de documentación</div><span class="tl-badge c1-b">Fundamentos</span></div>
+                  <div class="capacidad-row"><div class="cap-icon c1-icon">▶</div><div class="cap-text c1-t"><strong>Capacidad formada:</strong> Comprender la brecha entre el modelo ideal y el comportamiento real de un componente analógico, y documentar esa brecha con rigor técnico.</div></div>
+                  <div class="capacidad-row"><div class="cap-icon" style="background:#E1F5EE;color:#085041;border:0.5px solid #5DCAA5;">→</div><div class="cap-text c1-t">Caracterización de BW y Slew Rate. 5 aplicaciones avanzadas con Op-Amps. Documentación LaTeX con CircuiTikZ.</div></div>
+                  <div class="met-tags"><span class="met-tag" style="border-color:#0F6E56;color:#085041;background:#9FE1CB;">Análisis experimental</span><span class="met-tag" style="border-color:#0F6E56;color:#085041;background:#9FE1CB;">Trabajo colaborativo</span><span class="met-tag" style="border-color:#0F6E56;color:#085041;background:#9FE1CB;">Documentación técnica</span><span class="met-tag" style="border-color:#0F6E56;color:#085041;background:#9FE1CB;">LaTeX / CircuiTikZ</span></div>
+                </div>
+                <div class="tl-card-img c1-img"><div style="font-size:22px;opacity:0.3;">🖼</div><div class="img-placeholder-text c1-t">Imagen<br>del proyecto</div></div>
+              </div>
             </div>
-            <div class="pd-text" style="margin-top:8px;">Comparación sistemática entre el modelo ideal, la simulación SPICE y las mediciones reales. Cada discrepancia documentada en CircuiTikZ con análisis de error justificado.</div>
-          </div>
-          <div class="pd-method" style="background:#E1F5EE;border:0.5px solid #5DCAA5;">
-            <div class="pd-method-slabel" style="color:#0F6E56;">Competencias desarrolladas</div>
-            <div style="display:flex;flex-wrap:wrap;gap:4px;">
-              <span class="method-pill" style="border-color:#0F6E56;color:#085041;background:#9FE1CB;">Análisis experimental</span>
-              <span class="method-pill" style="border-color:#0F6E56;color:#085041;background:#9FE1CB;">LaTeX / CircuiTikZ</span>
-              <span class="method-pill" style="border-color:#0F6E56;color:#085041;background:#9FE1CB;">Trabajo colaborativo</span>
-              <span class="method-pill" style="border-color:#0F6E56;color:#085041;background:#9FE1CB;">Documentación técnica</span>
+            <!-- P2 -->
+            <div class="tl-item">
+              <div class="tl-node"><div class="tl-circle c2-circle">2</div></div>
+              <div class="tl-card c2">
+                <div class="tl-card-content">
+                  <div class="tl-card-header"><div class="tl-card-title c2-t">Concepción de ideas a partir de problemas reales</div><span class="tl-badge c2-b">Diseño centrado</span></div>
+                  <div class="capacidad-row"><div class="cap-icon c2-icon">▶</div><div class="cap-text c2-t"><strong>Capacidad formada:</strong> Identificar necesidades reales del entorno, formular propuestas de valor y construir un producto mínimo viable que las valide con usuarios reales.</div></div>
+                  <div class="capacidad-row"><div class="cap-icon" style="background:#E6F1FB;color:#0C447C;border:0.5px solid #85B7EB;">→</div><div class="cap-text c2-t">Investigación de campo en 6+ laboratorios. MVP de instrumentación analógica. Fabricación en CNC. Validación con usuarios y decisión de pivote.</div></div>
+                  <div class="met-tags"><span class="met-tag" style="border-color:#185FA5;color:#0C447C;background:#B5D4F4;">Lean Startup</span><span class="met-tag" style="border-color:#185FA5;color:#0C447C;background:#B5D4F4;">Ciclo crear-medir-aprender</span><span class="met-tag" style="border-color:#185FA5;color:#0C447C;background:#B5D4F4;">Empatía con usuario</span><span class="met-tag" style="border-color:#185FA5;color:#0C447C;background:#B5D4F4;">Prototipado rápido</span></div>
+                </div>
+                <div class="tl-card-img c2-img"><div style="font-size:22px;opacity:0.3;">🖼</div><div class="img-placeholder-text c2-t">Imagen<br>del proyecto</div></div>
+              </div>
             </div>
-            <div style="font-size:10px;line-height:1.6;font-weight:300;color:#085041;margin-top:6px;">Primer acercamiento al rigor documental de ingeniería: resultados tabulados, oscilogramas capturados y análisis de por qué la realidad difiere de la simulación.</div>
+            <!-- P3 -->
+            <div class="tl-item">
+              <div class="tl-node"><div class="tl-circle c3-circle">3</div></div>
+              <div class="tl-card c3">
+                <div class="tl-card-content">
+                  <div class="tl-card-header"><div class="tl-card-title c3-t">Especificación técnica para fabricación profesional</div><span class="tl-badge c3-b">Comunicación técnica</span></div>
+                  <div class="capacidad-row"><div class="cap-icon c3-icon">▶</div><div class="cap-text c3-t"><strong>Capacidad formada:</strong> Traducir un diseño electrónico en un conjunto de especificaciones que un fabricante industrial pueda reproducir, optimizando costo y calidad.</div></div>
+                  <div class="capacidad-row"><div class="cap-icon" style="background:#FAEEDA;color:#633806;border:0.5px solid #EF9F27;">→</div><div class="cap-text c3-t">Flujo completo EasyEDA: esquemático → layout → DRC → Gerbers. DFM aplicado. BOM con referencias comerciales. Costo &lt;20 USD.</div></div>
+                  <div class="met-tags"><span class="met-tag" style="border-color:#854F0B;color:#633806;background:#FAC775;">DFM</span><span class="met-tag" style="border-color:#854F0B;color:#633806;background:#FAC775;">DRC</span><span class="met-tag" style="border-color:#854F0B;color:#633806;background:#FAC775;">Manufactura industrial</span><span class="met-tag" style="border-color:#854F0B;color:#633806;background:#FAC775;">Optimización de costo</span></div>
+                </div>
+                <div class="tl-card-img c3-img"><div style="font-size:22px;opacity:0.3;">🖼</div><div class="img-placeholder-text c3-t">Imagen<br>del proyecto</div></div>
+              </div>
+            </div>
+            <!-- P4 -->
+            <div class="tl-item">
+              <div class="tl-node"><div class="tl-circle c4-circle">4</div></div>
+              <div class="tl-card c4">
+                <div class="tl-card-content">
+                  <div class="tl-card-header"><div class="tl-card-title c4-t">Investigación y definición de requisitos de sistema</div><span class="tl-badge c4-b">Definición</span></div>
+                  <div class="capacidad-row"><div class="cap-icon c4-icon">▶</div><div class="cap-text c4-t"><strong>Capacidad formada:</strong> Investigar un dominio (bioseñales), descomponer un sistema complejo en módulos con requisitos claros y definir el modelo conceptual antes de construir.</div></div>
+                  <div class="capacidad-row"><div class="cap-icon" style="background:#EEEDFE;color:#3C3489;border:0.5px solid #AFA9EC;">→</div><div class="cap-text c4-t">Caracterización ECG: ondas P·Q·R·S·T. Selección de ≥3 anomalías con descripción paramétrica. Diagrama de bloques con módulos asignados.</div></div>
+                  <div class="met-tags"><span class="met-tag" style="border-color:#534AB7;color:#3C3489;background:#CECBF6;">Modelado sistémico</span><span class="met-tag" style="border-color:#534AB7;color:#3C3489;background:#CECBF6;">Definición de requisitos</span><span class="met-tag" style="border-color:#534AB7;color:#3C3489;background:#CECBF6;">Descomposición funcional</span></div>
+                </div>
+                <div class="tl-card-img c4-img"><div style="font-size:22px;opacity:0.3;">🖼</div><div class="img-placeholder-text c4-t">Imagen<br>del proyecto</div></div>
+              </div>
+            </div>
+            <!-- P5 -->
+            <div class="tl-item">
+              <div class="tl-node"><div class="tl-circle c5-circle">5</div></div>
+              <div class="tl-card c5">
+                <div class="tl-card-content">
+                  <div class="tl-card-header"><div class="tl-card-title c5-t">Implementación, validación y proyección a fabricación</div><span class="tl-badge c5-b">Cierre del ciclo</span></div>
+                  <div class="capacidad-row"><div class="cap-icon c5-icon">▶</div><div class="cap-text c5-t"><strong>Capacidad formada:</strong> Materializar un modelo conceptual en un prototipo funcional, validarlo con instrumentación real y documentarlo para reproducción industrial.</div></div>
+                  <div class="capacidad-row"><div class="cap-icon" style="background:#FAECE7;color:#712B13;border:0.5px solid #F0997B;">→</div><div class="cap-text c5-t">Prototipo PCB sintetizador ECG. Validación en osciloscopio: señal normal y ≥3 anomalías. Paquete de fabricación: Gerbers, BOM, esquemático final.</div></div>
+                  <div class="met-tags"><span class="met-tag" style="border-color:#993C1D;color:#712B13;background:#F5C4B3;">Validación experimental</span><span class="met-tag" style="border-color:#993C1D;color:#712B13;background:#F5C4B3;">Iteración de diseño</span><span class="met-tag" style="border-color:#993C1D;color:#712B13;background:#F5C4B3;">Documentación para fabricación</span></div>
+                </div>
+                <div class="tl-card-img c5-img"><div style="font-size:22px;opacity:0.3;">🖼</div><div class="img-placeholder-text c5-t">Imagen<br>del proyecto</div></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <!-- P02 -->
+
+    <!-- CAPACIDADES -->
     <div>
-      <div class="proj-section-header">
-        <span class="proj-num-pill" style="background:#0C447C;color:#E6F1FB;">P·02</span>
-        <div class="section-label" style="margin-bottom:0;">Instrumentación analógica con metodología Lean Startup</div>
-      </div>
-      <div class="proj-detail">
-        <div class="pd-left" style="background:#0C1F3A;">
-          <div class="pd-slabel" style="color:#85B7EB;">Empatía & concepción del problema</div>
-          <div class="pd-title" style="color:#378ADD;">Necesidad real<br>en laboratorio</div>
-          <svg width="100%" height="56" viewBox="0 0 220 56">
-            <circle cx="110" cy="28" r="22" fill="none" stroke="rgba(55,138,221,0.2)" stroke-width="0.5"/>
-            <circle cx="110" cy="28" r="14" fill="none" stroke="rgba(55,138,221,0.35)" stroke-width="0.5"/>
-            <text x="110" y="6" text-anchor="middle" font-family="monospace" font-size="7" fill="#85B7EB" font-weight="500">CREAR</text>
-            <text x="196" y="42" text-anchor="middle" font-family="monospace" font-size="7" fill="#85B7EB" font-weight="500">MEDIR</text>
-            <text x="24" y="42" text-anchor="middle" font-family="monospace" font-size="7" fill="#85B7EB" font-weight="500">APRENDER</text>
-            <path d="M110,10 Q160,10 185,35" fill="none" stroke="#378ADD" stroke-width="1" stroke-dasharray="3,2"/>
-            <path d="M185,38 Q170,52 130,50" fill="none" stroke="#378ADD" stroke-width="1" stroke-dasharray="3,2"/>
-            <path d="M90,50 Q50,52 35,35" fill="none" stroke="#378ADD" stroke-width="1" stroke-dasharray="3,2"/>
-            <path d="M35,30 Q35,10 105,8" fill="none" stroke="#378ADD" stroke-width="1" stroke-dasharray="3,2"/>
-            <text x="110" y="31" text-anchor="middle" font-family="monospace" font-size="6.5" fill="rgba(255,255,255,0.4)">MVP</text>
-          </svg>
-          <div class="badge-row">
-            <span class="badge" style="background:#0C447C;color:#B5D4F4;">6+ labs visitados</span>
-            <span class="badge" style="background:#0C447C;color:#B5D4F4;">Entrevistas</span>
-            <span class="badge" style="background:#0C447C;color:#B5D4F4;">Pivote aplicado</span>
-          </div>
-          <div class="bullet-list" style="margin-top:8px;">
-            <div style="font-family:monospace;font-size:8px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px;">Proceso Lean ejecutado</div>
-            <div class="bullet-item"><div class="bdot" style="background:#378ADD;"></div><span style="color:rgba(255,255,255,0.75);">Investigación de campo en laboratorios</span></div>
-            <div class="bullet-item"><div class="bdot" style="background:#378ADD;"></div><span style="color:rgba(255,255,255,0.75);">Definición de propuesta única de valor</span></div>
-            <div class="bullet-item"><div class="bdot" style="background:#378ADD;"></div><span style="color:rgba(255,255,255,0.75);">Diseño y simulación del MVP (Op-Amps)</span></div>
-            <div class="bullet-item"><div class="bdot" style="background:#378ADD;"></div><span style="color:rgba(255,255,255,0.75);">Fabricación PCB en fresadora CNC</span></div>
-            <div class="bullet-item"><div class="bdot" style="background:#378ADD;"></div><span style="color:rgba(255,255,255,0.75);">Validación con usuarios y decisión de pivote</span></div>
-          </div>
-        </div>
-        <div class="pd-right">
-          <div class="pd-arch">
-            <div class="pd-arch-slabel">Flujo de diseño</div>
-            <div class="pd-arch-title">Del problema al prototipo</div>
-            <div class="blocks-flow">
-              <div class="block"><div class="block-label">Empatía<br>campo</div></div>
-              <div class="block-arrow">›</div>
-              <div class="block"><div class="block-label">Diseño<br>MVP</div></div>
-              <div class="block-arrow">›</div>
-              <div class="block"><div class="block-label">PCB<br>CNC</div></div>
-              <div class="block-arrow">›</div>
-              <div class="block" style="background:#0C447C;"><div class="block-label" style="color:#B5D4F4;">Validar<br>usuario</div></div>
-            </div>
-            <div class="pd-text" style="margin-top:8px;">El producto mínimo viable se diseñó con Op-Amps para resolver una necesidad identificada en campo. La validación con el usuario real determinó si perseverar o pivotar el enfoque.</div>
-          </div>
-          <div class="pd-method" style="background:#E6F1FB;border:0.5px solid #85B7EB;">
-            <div class="pd-method-slabel" style="color:#185FA5;">Metodología aplicada</div>
-            <div style="display:flex;flex-wrap:wrap;gap:4px;">
-              <span class="method-pill" style="border-color:#185FA5;color:#0C447C;background:#B5D4F4;">Lean Startup</span>
-              <span class="method-pill" style="border-color:#185FA5;color:#0C447C;background:#B5D4F4;">Design Thinking</span>
-              <span class="method-pill" style="border-color:#185FA5;color:#0C447C;background:#B5D4F4;">DFM para CNC</span>
-              <span class="method-pill" style="border-color:#185FA5;color:#0C447C;background:#B5D4F4;">Prototipado rápido</span>
-            </div>
-            <div style="font-size:10px;line-height:1.6;font-weight:300;color:#0C447C;margin-top:6px;">Primera aplicación del ciclo Crear-Medir-Aprender al diseño electrónico. La empatía con el usuario demostró que definir bien el problema evita soluciones irrelevantes.</div>
-          </div>
+      <div class="section-label">Capacidades consolidadas al cierre del semestre</div>
+      <div class="competencias-box">
+        <div style="font-size:10px;color:#555;line-height:1.6;font-weight:300;margin-bottom:10px;">La ruta de cinco proyectos no produce solo un prototipo — produce un ingeniero capaz de recorrer el ciclo completo de diseño electrónico: desde la tecnología hasta el usuario, desde el concepto hasta la fabricación.</div>
+        <div class="comp-grid">
+          <div class="comp-item"><div class="comp-num" style="color:#0F6E56;">01</div><div class="comp-label">Análisis de sistemas reales</div><div class="comp-sub">Medir, comparar y justificar desviaciones entre modelo y realidad</div></div>
+          <div class="comp-item"><div class="comp-num" style="color:#185FA5;">02</div><div class="comp-label">Diseño centrado en el problema</div><div class="comp-sub">Identificar necesidades antes de proponer soluciones técnicas</div></div>
+          <div class="comp-item"><div class="comp-num" style="color:#854F0B;">03</div><div class="comp-label">Especificación para fabricación</div><div class="comp-sub">Comunicar diseños con el lenguaje de la industria</div></div>
+          <div class="comp-item"><div class="comp-num" style="color:#712B13;">04</div><div class="comp-label">Prototipado y validación</div><div class="comp-sub">Construir, medir y documentar con rigor de ingeniería</div></div>
         </div>
       </div>
     </div>
-    <!-- P03 -->
+
+    <!-- EJE CENTRAL -->
     <div>
-      <div class="proj-section-header">
-        <span class="proj-num-pill" style="background:#633806;color:#FAEEDA;">P·03</span>
-        <div class="section-label" style="margin-bottom:0;">Tutorial de diseño PCB y manufactura digital en EasyEDA</div>
-      </div>
-      <div class="proj-detail">
-        <div class="pd-left" style="background:#1A1000;">
-          <div class="pd-slabel" style="color:#EF9F27;">Comunicación técnica con fabricantes</div>
-          <div class="pd-title" style="color:#BA7517;">PCB fabricable<br>&lt; 20 USD</div>
-          <svg width="100%" height="56" viewBox="0 0 220 56">
-            <rect x="10" y="8" width="190" height="10" rx="2" fill="rgba(239,159,39,0.15)" stroke="#EF9F27" stroke-width="0.5"/>
-            <text x="14" y="16" font-family="monospace" font-size="6.5" fill="#EF9F27">Serigrafía (silkscreen)</text>
-            <rect x="10" y="21" width="190" height="10" rx="2" fill="rgba(239,159,39,0.1)" stroke="#BA7517" stroke-width="0.5"/>
-            <text x="14" y="29" font-family="monospace" font-size="6.5" fill="#BA7517">Máscara antisoldante</text>
-            <rect x="10" y="34" width="190" height="10" rx="2" fill="rgba(186,117,23,0.2)" stroke="#854F0B" stroke-width="0.5"/>
-            <text x="14" y="42" font-family="monospace" font-size="6.5" fill="#854F0B">Cobre (pistas + pads)</text>
-            <rect x="10" y="47" width="190" height="6" rx="2" fill="rgba(99,56,6,0.3)" stroke="#633806" stroke-width="0.5"/>
-            <text x="14" y="52" font-family="monospace" font-size="6" fill="#633806">Sustrato FR4</text>
-          </svg>
-          <div class="badge-row">
-            <span class="badge" style="background:#633806;color:#FAC775;">DRC validado</span>
-            <span class="badge" style="background:#633806;color:#FAC775;">Gerbers</span>
-            <span class="badge" style="background:#633806;color:#FAC775;">BOM completo</span>
-          </div>
-          <div class="bullet-list" style="margin-top:8px;">
-            <div style="font-family:monospace;font-size:8px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px;">Entregables clave</div>
-            <div class="bullet-item"><div class="bdot" style="background:#EF9F27;"></div><span style="color:rgba(255,255,255,0.75);">Tutorial paso a paso en EasyEDA</span></div>
-            <div class="bullet-item"><div class="bdot" style="background:#EF9F27;"></div><span style="color:rgba(255,255,255,0.75);">Esquemático validado + layout final</span></div>
-            <div class="bullet-item"><div class="bdot" style="background:#EF9F27;"></div><span style="color:rgba(255,255,255,0.75);">Reporte DRC y revisión DFM (5+ puntos)</span></div>
-            <div class="bullet-item"><div class="bdot" style="background:#EF9F27;"></div><span style="color:rgba(255,255,255,0.75);">Archivos Gerber + drill listos para JLCPCB</span></div>
-            <div class="bullet-item"><div class="bdot" style="background:#EF9F27;"></div><span style="color:rgba(255,255,255,0.75);">Estimación de costo justificada &lt;20 USD</span></div>
+      <div class="section-label">Eje central: aprendizaje técnico &amp; metodología de diseño</div>
+      <div class="rel-grid">
+        <div class="rel-panel" style="background:#0D1B2A;">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:2px;color:#1D9E75;text-transform:uppercase;margin-bottom:8px;">Proceso de diseño recorrido</div>
+          <div style="display:flex;flex-direction:column;gap:6px;">
+            <div style="display:flex;align-items:center;gap:8px;"><div style="width:7px;height:7px;border-radius:50%;background:#1D9E75;flex-shrink:0;"></div><div style="font-size:9.5px;color:rgba(255,255,255,0.8);line-height:1.4;"><strong style="color:#1D9E75;">Comprender</strong> la tecnología y sus límites reales</div></div>
+            <div style="display:flex;align-items:center;gap:8px;"><div style="width:7px;height:7px;border-radius:50%;background:#378ADD;flex-shrink:0;"></div><div style="font-size:9.5px;color:rgba(255,255,255,0.8);line-height:1.4;"><strong style="color:#378ADD;">Identificar</strong> problemas y necesidades del entorno</div></div>
+            <div style="display:flex;align-items:center;gap:8px;"><div style="width:7px;height:7px;border-radius:50%;background:#EF9F27;flex-shrink:0;"></div><div style="font-size:9.5px;color:rgba(255,255,255,0.8);line-height:1.4;"><strong style="color:#EF9F27;">Especificar</strong> soluciones para fabricación industrial</div></div>
+            <div style="display:flex;align-items:center;gap:8px;"><div style="width:7px;height:7px;border-radius:50%;background:#7F77DD;flex-shrink:0;"></div><div style="font-size:9.5px;color:rgba(255,255,255,0.8);line-height:1.4;"><strong style="color:#7F77DD;">Formular</strong> modelos y descomponer en requisitos</div></div>
+            <div style="display:flex;align-items:center;gap:8px;"><div style="width:7px;height:7px;border-radius:50%;background:#D85A30;flex-shrink:0;"></div><div style="font-size:9.5px;color:rgba(255,255,255,0.8);line-height:1.4;"><strong style="color:#D85A30;">Prototipar, validar y mejorar</strong> con instrumentación real</div></div>
           </div>
         </div>
-        <div class="pd-right">
-          <div class="pd-arch">
-            <div class="pd-arch-slabel">Flujo completo EasyEDA</div>
-            <div class="pd-arch-title">Esquemático → fabricación</div>
-            <div class="blocks-flow">
-              <div class="block"><div class="block-label">Esquem.<br>captura</div></div>
-              <div class="block-arrow">›</div>
-              <div class="block"><div class="block-label">Layout<br>PCB</div></div>
-              <div class="block-arrow">›</div>
-              <div class="block"><div class="block-label">DRC<br>DFM</div></div>
-              <div class="block-arrow">›</div>
-              <div class="block" style="background:#633806;"><div class="block-label" style="color:#FAC775;">Gerbers<br>BOM</div></div>
-            </div>
-            <div class="pd-text" style="margin-top:8px;">Flujo de diseño industrial completo: desde la captura del esquemático hasta los archivos de fabricación listos para un proveedor como JLCPCB, con criterios de costo explícitos.</div>
-          </div>
-          <div class="pd-method" style="background:#FAEEDA;border:0.5px solid #EF9F27;">
-            <div class="pd-method-slabel" style="color:#854F0B;">Criterios DFM aplicados</div>
-            <div style="display:flex;flex-wrap:wrap;gap:4px;">
-              <span class="method-pill" style="border-color:#854F0B;color:#633806;background:#FAC775;">Ancho de pista</span>
-              <span class="method-pill" style="border-color:#854F0B;color:#633806;background:#FAC775;">Separación mínima</span>
-              <span class="method-pill" style="border-color:#854F0B;color:#633806;background:#FAC775;">Tamaño de vías</span>
-              <span class="method-pill" style="border-color:#854F0B;color:#633806;background:#FAC775;">Encapsulados SMD</span>
-            </div>
-            <div style="font-size:10px;line-height:1.6;font-weight:300;color:#633806;margin-top:6px;">Las restricciones de manufactura enseñaron que diseñar para fabricar es tan importante como diseñar para funcionar. Las decisiones de costo mejoraron la calidad del diseño.</div>
+        <div class="rel-panel" style="background:#EAF3DE;border:0.5px solid #97C459;">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:2px;color:#3B6D11;text-transform:uppercase;margin-bottom:8px;">Metodologías integradas</div>
+          <div style="display:flex;flex-direction:column;gap:7px;">
+            <div style="background:#fff;border:0.5px solid #97C459;border-radius:5px;padding:7px 9px;"><div style="font-size:10px;font-weight:600;color:#27500A;margin-bottom:2px;">Lean Startup</div><div style="font-size:9px;color:#3B6D11;font-weight:300;line-height:1.4;">Ciclo crear-medir-aprender aplicado al diseño electrónico. El pivote como herramienta de diseño, no como fracaso.</div></div>
+            <div style="background:#fff;border:0.5px solid #97C459;border-radius:5px;padding:7px 9px;"><div style="font-size:10px;font-weight:600;color:#27500A;margin-bottom:2px;">CDIO — Concebir, Diseñar, Implementar, Operar</div><div style="font-size:9px;color:#3B6D11;font-weight:300;line-height:1.4;">Marco pedagógico que articula los cinco proyectos como etapas de un mismo ciclo de formación en ingeniería.</div></div>
+            <div style="background:#fff;border:0.5px solid #97C459;border-radius:5px;padding:7px 9px;"><div style="font-size:10px;font-weight:600;color:#27500A;margin-bottom:2px;">DFM / DRC — Diseño para fabricación</div><div style="font-size:9px;color:#3B6D11;font-weight:300;line-height:1.4;">Las restricciones industriales como criterio de calidad: un diseño que no puede fabricarse no está terminado.</div></div>
           </div>
         </div>
       </div>
     </div>
-    <!-- P04 -->
-    <div>
-      <div class="proj-section-header">
-        <span class="proj-num-pill" style="background:#3C3489;color:#EEEDFE;">P·04</span>
-        <div class="section-label" style="margin-bottom:0;">Conceptualización del sintetizador analógico de señal ECG</div>
-      </div>
-      <div class="proj-detail">
-        <div class="pd-left" style="background:#0D0B1F;">
-          <div class="pd-slabel" style="color:#AFA9EC;">Investigación & definición del problema</div>
-          <div class="pd-title" style="color:#7F77DD;">Modelo conceptual<br>del sistema ECG</div>
-          <svg width="100%" height="56" viewBox="0 0 220 56">
-            <line x1="8" y1="38" x2="212" y2="38" stroke="rgba(175,169,236,0.2)" stroke-width="0.5"/>
-            <polyline points="8,38 28,38 36,30 44,38 56,38 64,34 70,38 76,38 82,38 86,16 90,48 94,38 106,38 114,30 122,38 138,38 158,38" fill="none" stroke="#7F77DD" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
-            <line x1="36" y1="28" x2="36" y2="53" stroke="#534AB7" stroke-width="0.6" stroke-dasharray="2,2"/>
-            <line x1="64" y1="32" x2="64" y2="53" stroke="#BA7517" stroke-width="0.6" stroke-dasharray="2,2"/>
-            <line x1="86" y1="14" x2="86" y2="53" stroke="#993C1D" stroke-width="0.6" stroke-dasharray="2,2"/>
-            <line x1="90" y1="46" x2="90" y2="53" stroke="#185FA5" stroke-width="0.6" stroke-dasharray="2,2"/>
-            <line x1="114" y1="28" x2="114" y2="53" stroke="#0F6E56" stroke-width="0.6" stroke-dasharray="2,2"/>
-            <text x="33" y="56" font-family="monospace" font-size="6" fill="#534AB7">P</text>
-            <text x="61" y="56" font-family="monospace" font-size="6" fill="#BA7517">Q</text>
-            <text x="83" y="56" font-family="monospace" font-size="6" fill="#993C1D">R</text>
-            <text x="88" y="56" font-family="monospace" font-size="6" fill="#185FA5">  S</text>
-            <text x="111" y="56" font-family="monospace" font-size="6" fill="#0F6E56">T</text>
-          </svg>
-          <div class="badge-row">
-            <span class="badge" style="background:#3C3489;color:#CECBF6;">5 subondas</span>
-            <span class="badge" style="background:#3C3489;color:#CECBF6;">3+ anomalías</span>
-            <span class="badge" style="background:#3C3489;color:#CECBF6;">Diagrama bloques</span>
-          </div>
-          <div class="bullet-list" style="margin-top:8px;">
-            <div style="font-family:monospace;font-size:8px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px;">Anomalías definidas</div>
-            <div class="bullet-item"><div class="bdot" style="background:#534AB7;"></div><span style="color:rgba(255,255,255,0.75);">Taquicardia: período R-R reducido</span></div>
-            <div class="bullet-item"><div class="bdot" style="background:#993C1D;"></div><span style="color:rgba(255,255,255,0.75);">Fibrilación auricular: onda P ausente</span></div>
-            <div class="bullet-item"><div class="bdot" style="background:#BA7517;"></div><span style="color:rgba(255,255,255,0.75);">Bloqueo AV: intervalo PR prolongado</span></div>
-          </div>
-        </div>
-        <div class="pd-right">
-          <div class="pd-arch">
-            <div class="pd-arch-slabel">Arquitectura conceptual</div>
-            <div class="pd-arch-title">Sistema por bloques</div>
-            <div class="blocks-flow">
-              <div class="block"><div class="block-label">Gen.<br>ritmo</div></div>
-              <div class="block-arrow">›</div>
-              <div class="block"><div class="block-label">Sub-<br>ondas</div></div>
-              <div class="block-arrow">›</div>
-              <div class="block"><div class="block-label">Control<br>temporal</div></div>
-              <div class="block-arrow">›</div>
-              <div class="block" style="background:#3C3489;"><div class="block-label" style="color:#CECBF6;">Suma<br>salida</div></div>
-            </div>
-            <div class="pd-text" style="margin-top:8px;">El ECG se modela como suma de subondas independientes. Cada bloque tiene parámetros controlables de amplitud, duración y posición temporal dentro del ciclo cardíaco.</div>
-          </div>
-          <div class="pd-method" style="background:#EEEDFE;border:0.5px solid #AFA9EC;">
-            <div class="pd-method-slabel" style="color:#534AB7;">Enfoque de modelado</div>
-            <div style="display:flex;flex-wrap:wrap;gap:4px;">
-              <span class="method-pill" style="border-color:#534AB7;color:#3C3489;background:#CECBF6;">Modelado sistémico</span>
-              <span class="method-pill" style="border-color:#534AB7;color:#3C3489;background:#CECBF6;">Requisitos claros</span>
-              <span class="method-pill" style="border-color:#534AB7;color:#3C3489;background:#CECBF6;">Descomposición funcional</span>
-            </div>
-            <div style="font-size:10px;line-height:1.6;font-weight:300;color:#3C3489;margin-top:6px;">Antes de diseñar el circuito, se definió con precisión qué debe hacer el sistema. La claridad en los requisitos eliminó ambigüedades en la fase de implementación del P·05.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- P05 -->
-    <div>
-      <div class="proj-section-header">
-        <span class="proj-num-pill" style="background:#712B13;color:#FAECE7;">P·05</span>
-        <div class="section-label" style="margin-bottom:0;">Prototipo, validación experimental y documentación para fabricación</div>
-      </div>
-      <div class="proj-detail">
-        <div class="pd-left" style="background:#1A0800;">
-          <div class="pd-slabel" style="color:#F0997B;">Señal ECG objetivo</div>
-          <div class="pd-title" style="color:#D85A30;">Ondas del complejo<br>cardíaco</div>
-          <svg width="100%" height="56" viewBox="0 0 240 56">
-            <line x1="0" y1="38" x2="240" y2="38" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
-            <polyline points="0,38 20,38 30,38 36,30 42,38 55,38 65,34 72,38 80,38 88,38 92,10 96,50 100,38 115,38 125,28 135,38 155,38 175,38 185,38" fill="none" stroke="#D85A30" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <text x="33" y="26" font-family="monospace" font-size="7" fill="#534AB7" font-weight="500">P</text>
-            <text x="63" y="31" font-family="monospace" font-size="7" fill="#BA7517" font-weight="500">Q</text>
-            <text x="90" y="8" font-family="monospace" font-size="7" fill="#993C1D" font-weight="500">R</text>
-            <text x="96" y="56" font-family="monospace" font-size="7" fill="#185FA5" font-weight="500">S</text>
-            <text x="122" y="25" font-family="monospace" font-size="7" fill="#0F6E56" font-weight="500">T</text>
-          </svg>
-          <div class="badge-row">
-            <span class="badge" style="background:#712B13;color:#F5C4B3;">PCB fabricada</span>
-            <span class="badge" style="background:#712B13;color:#F5C4B3;">Osciloscopio</span>
-            <span class="badge" style="background:#712B13;color:#F5C4B3;">≥3 anomalías</span>
-          </div>
-          <div class="bullet-list" style="margin-top:8px;">
-            <div style="font-family:monospace;font-size:8px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px;">Anomalías validadas</div>
-            <div class="bullet-item"><div class="bdot" style="background:#534AB7;"></div><span style="color:rgba(255,255,255,0.75);">Taquicardia: intervalo R-R reducido</span></div>
-            <div class="bullet-item"><div class="bdot" style="background:#993C1D;"></div><span style="color:rgba(255,255,255,0.75);">Fibrilación auricular: onda P ausente</span></div>
-            <div class="bullet-item"><div class="bdot" style="background:#BA7517;"></div><span style="color:rgba(255,255,255,0.75);">Bloqueo AV: intervalo PR prolongado</span></div>
-          </div>
-        </div>
-        <div class="pd-right">
-          <div class="pd-arch">
-            <div class="pd-arch-slabel">Arquitectura del sistema</div>
-            <div class="pd-arch-title">Diagrama de bloques</div>
-            <div class="blocks-flow">
-              <div class="block"><div class="block-label">Gen.<br>ritmo</div></div>
-              <div class="block-arrow">›</div>
-              <div class="block"><div class="block-label">Gen.<br>subondas</div></div>
-              <div class="block-arrow">›</div>
-              <div class="block"><div class="block-label">Control<br>temporal</div></div>
-              <div class="block-arrow">›</div>
-              <div class="block" style="background:#712B13;"><div class="block-label" style="color:#F5C4B3;">Salida<br>ECG</div></div>
-            </div>
-            <div class="pd-text" style="margin-top:8px;">Cada subonda se genera independientemente con amplitud y duración controlables. El sumador analógico reconstruye el complejo cardíaco completo.</div>
-          </div>
-          <div class="pd-method" style="background:#FAECE7;border:0.5px solid #F0997B;">
-            <div class="pd-method-slabel" style="color:#993C1D;">Metodologías aplicadas</div>
-            <div style="display:flex;flex-wrap:wrap;gap:4px;">
-              <span class="method-pill" style="border-color:#993C1D;color:#712B13;background:#F5C4B3;">Validación experimental</span>
-              <span class="method-pill" style="border-color:#993C1D;color:#712B13;background:#F5C4B3;">DFM / Gerbers</span>
-              <span class="method-pill" style="border-color:#993C1D;color:#712B13;background:#F5C4B3;">Diseño iterativo</span>
-              <span class="method-pill" style="border-color:#993C1D;color:#712B13;background:#F5C4B3;">Documentación dual</span>
-            </div>
-            <div style="font-size:10px;line-height:1.6;font-weight:300;color:#712B13;margin-top:6px;">Cierre del ciclo de ingeniería: el modelo conceptual del P·04 se materializó, validó con instrumentación real y se documentó para su reproducción industrial completa.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- ANÁLISIS CRÍTICO -->
-    <div>
-      <div class="section-label">Análisis crítico del proceso</div>
-      <div class="critical-path-h">
-        <div class="milestones-grid">
-          <div class="milestone-col"><div class="milestone-dot" style="background:#1D9E75;"></div><div class="milestone-title">El modelo ideal no basta</div><div class="milestone-text">BW y Slew Rate reales del Op-Amp limitaron la onda R. La ganancia nominal debió ajustarse para compensar el ancho de banda real del componente.</div></div>
-          <div class="milestone-col"><div class="milestone-dot" style="background:#534AB7;"></div><div class="milestone-title">Empatía antes que circuito</div><div class="milestone-text">El Lean Startup reveló que el problema real en laboratorio no era el esperado. El pivote en P·02 evitó una solución técnicamente correcta pero irrelevante.</div></div>
-          <div class="milestone-col"><div class="milestone-dot" style="background:#BA7517;"></div><div class="milestone-title">DFM como restricción creativa</div><div class="milestone-text">Mantener el costo bajo 20 USD obligó a elegir encapsulados SMD estándar. Las restricciones de manufactura mejoraron la calidad del diseño final.</div></div>
-          <div class="milestone-col"><div class="milestone-dot" style="background:#993C1D;"></div><div class="milestone-title">Síntesis modular por subondas</div><div class="milestone-text">Descomponer el ECG en ondas independientes permitió simular anomalías modificando un solo parámetro sin rediseñar el sistema completo.</div></div>
-        </div>
-      </div>
-    </div>
+
     <!-- CONCLUSIONES -->
     <div class="conclusions-box">
       <div class="section-label" style="color:#5DCAA5;">Conclusiones</div>
       <div style="font-family:'Bebas Neue',sans-serif;font-size:20px;color:#fff;letter-spacing:0.5px;margin-bottom:10px;">Síntesis de aportes del semestre</div>
       <div class="conclusions-grid">
-        <div class="conclusion-item"><div class="conclusion-title">Competencia técnica integral</div><div class="conclusion-text">De la teoría de Op-Amps ideales al diseño de un sistema analógico complejo fabricable, validado experimentalmente en cada etapa.</div></div>
-        <div class="conclusion-item"><div class="conclusion-title">Ingeniería centrada en el usuario</div><div class="conclusion-text">Identificar el problema correcto es tan crítico como la solución técnica. Pivotar es parte del proceso de diseño, no un fracaso.</div></div>
-        <div class="conclusion-item"><div class="conclusion-title">Producto replicable</div><div class="conclusion-text">El sintetizador ECG está documentado con rigor suficiente para su reproducción: esquemáticos, PCB, BOM, Gerbers y manual de operación.</div></div>
+        <div class="conclusion-item"><div class="conclusion-title">Una ruta, no una lista de proyectos</div><div class="conclusion-text">Cada proyecto fue un eslabón de formación: desde la apropiación técnica hasta la implementación real. La secuencia construyó criterio ingenieril, no solo habilidades aisladas.</div></div>
+        <div class="conclusion-item"><div class="conclusion-title">Tecnología + metodología = criterio</div><div class="conclusion-text">El dominio técnico del Op-Amp y del ECG solo adquirió valor cuando se articuló con metodologías de diseño que orientaron las decisiones hacia problemas reales.</div></div>
+        <div class="conclusion-item"><div class="conclusion-title">Del concepto a la fabricación</div><div class="conclusion-text">El sintetizador ECG no es solo el producto final — es la evidencia de que el ciclo completo de ingeniería fue recorrido: concebir, diseñar, implementar y operar.</div></div>
       </div>
     </div>
+
   </div>
   <div class="footer">
     <div class="footer-left">Electrónica Analógica · Proyecto Integrador<br>Ingeniería Electrónica · 2025</div>
     <div class="footer-right">
-      <div class="ref-item">[1] Sedra & Smith, Microelectronic Circuits, 8th ed., Oxford, 2019.</div>
+      <div class="ref-item">[1] Sedra &amp; Smith, Microelectronic Circuits, 8th ed., Oxford, 2019.</div>
       <div class="ref-item">[2] Tompkins, W.J., Biomedical Digital Signal Processing, IEEE Press, 1993.</div>
       <div class="ref-item">[3] Ries, E., The Lean Startup, Crown Business, 2011.</div>
     </div>
